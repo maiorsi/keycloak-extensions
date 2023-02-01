@@ -1,0 +1,6 @@
+maiorsi/keycloak/model/UserDto.class
+maiorsi/keycloak/model/UserDto$Builder.class
+maiorsi/keycloak/model/ImmutableUserDto$Json.class
+maiorsi/keycloak/util/LdapUtils.class
+maiorsi/keycloak/model/ImmutableUserDto.class
+maiorsi/keycloak/model/ImmutableUserDto$Builder.class
