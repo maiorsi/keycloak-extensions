@@ -1,3 +1,0 @@
-keycloak.maiorsi.ldap.LdapSidStorageMapperFactory
-keycloak.maiorsi.ldap.LdapLogonStorageMapperFactory
-keycloak.maiorsi.ldap.LdapShortUpnStorageMapperFactory
