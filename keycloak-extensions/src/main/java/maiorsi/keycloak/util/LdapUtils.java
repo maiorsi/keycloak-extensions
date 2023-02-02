@@ -43,7 +43,7 @@ public final class LdapUtils {
 
         byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
 
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             byteBuffer.putInt((int) Long.parseLong(sidSections[i + 3]));
         }
 
@@ -78,7 +78,7 @@ public final class LdapUtils {
         for (int j = 0; j < countSubAuths; j++) {
             long subAuthority = 0;
 
-            for (int k =0; k < size; k++) {
+            for (int k = 0; k < size; k++) {
                 subAuthority |= (long) (objectSid[offset + k] & 0xFF) << (8 * k);
             }
 
@@ -93,25 +93,25 @@ public final class LdapUtils {
 
     private static String convertToDashedGuidString(byte[] objectGuid) {
         return prefixZeros((int) objectGuid[3] & 0xFF)
-            + prefixZeros((int) objectGuid[2] & 0xFF)
-            + prefixZeros((int) objectGuid[1] & 0xFF)
-            + prefixZeros((int) objectGuid[0] & 0xFF)
-            + "-"
-            + prefixZeros((int) objectGuid[5] & 0xFF)
-            + prefixZeros((int) objectGuid[4] & 0xFF)
-            + "-"
-            + prefixZeros((int) objectGuid[7] & 0xFF)
-            + prefixZeros((int) objectGuid[6] & 0xFF)
-            + "-"
-            + prefixZeros((int) objectGuid[8] & 0xFF)
-            + prefixZeros((int) objectGuid[9] & 0xFF)
-            + "-"
-            + prefixZeros((int) objectGuid[10] & 0xFF)
-            + prefixZeros((int) objectGuid[11] & 0xFF)
-            + prefixZeros((int) objectGuid[12] & 0xFF)
-            + prefixZeros((int) objectGuid[13] & 0xFF)
-            + prefixZeros((int) objectGuid[14] & 0xFF)
-            + prefixZeros((int) objectGuid[15] & 0xFF);
+                + prefixZeros((int) objectGuid[2] & 0xFF)
+                + prefixZeros((int) objectGuid[1] & 0xFF)
+                + prefixZeros((int) objectGuid[0] & 0xFF)
+                + "-"
+                + prefixZeros((int) objectGuid[5] & 0xFF)
+                + prefixZeros((int) objectGuid[4] & 0xFF)
+                + "-"
+                + prefixZeros((int) objectGuid[7] & 0xFF)
+                + prefixZeros((int) objectGuid[6] & 0xFF)
+                + "-"
+                + prefixZeros((int) objectGuid[8] & 0xFF)
+                + prefixZeros((int) objectGuid[9] & 0xFF)
+                + "-"
+                + prefixZeros((int) objectGuid[10] & 0xFF)
+                + prefixZeros((int) objectGuid[11] & 0xFF)
+                + prefixZeros((int) objectGuid[12] & 0xFF)
+                + prefixZeros((int) objectGuid[13] & 0xFF)
+                + prefixZeros((int) objectGuid[14] & 0xFF)
+                + prefixZeros((int) objectGuid[15] & 0xFF);
     }
 
     private static String prefixZeros(int value) {

@@ -60,6 +60,14 @@ public abstract class UserDto {
     }
 
     @JsonIgnore
+    public abstract Optional<String> sid();
+
+    @JsonProperty("sid")
+    public final String sidStr() {
+        return sid().orElse(null);
+    }
+
+    @JsonIgnore
     public abstract Optional<String> userPrincipalName();
 
     @JsonProperty("userPrincipalName")
