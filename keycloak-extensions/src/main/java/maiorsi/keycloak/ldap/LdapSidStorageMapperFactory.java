@@ -11,11 +11,11 @@ import org.keycloak.storage.ldap.LDAPStorageProvider;
 import org.keycloak.storage.ldap.mappers.AbstractLDAPStorageMapper;
 import org.keycloak.storage.ldap.mappers.AbstractLDAPStorageMapperFactory;
 
-public final class LdapShortUpnStorageMapperFactory extends AbstractLDAPStorageMapperFactory {
-    private static final String PROVIDER_ID = "short-upn-ldap-mapper";
+public final class LdapSidStorageMapperFactory extends AbstractLDAPStorageMapperFactory {
+    private static final String PROVIDER_ID = "sid-ldap-mapper";
     private static final List<ProviderConfigProperty> configProperties = new ArrayList<>();
 
-    public LdapShortUpnStorageMapperFactory() {}
+    public LdapSidStorageMapperFactory() {}
 
     @Override
     public String getId() {
@@ -30,7 +30,8 @@ public final class LdapShortUpnStorageMapperFactory extends AbstractLDAPStorageM
 
     @Override
     public String getHelpText() {
-        return "Used to map a single 'shortUpn' attribute with the form username@SHORT-DOMAIN to a user model.";
+        return "Used to map a single 'sid' attribute with the form S-1-5... "
+                + "from the 'objectSid' LDAP attribute to a user model.";
     }
 
     @Override
@@ -42,25 +43,16 @@ public final class LdapShortUpnStorageMapperFactory extends AbstractLDAPStorageM
     public void validateConfiguration(KeycloakSession _session, RealmModel _realm, ComponentModel config)
             throws ComponentValidationException {
         this.checkMandatoryConfigAttribute(LdapLogonStorageMapper.USER_MODEL_ATTRIBUTE, "User Model Attribute", config);
-        this.checkMandatoryConfigAttribute(LdapLogonStorageMapper.DOMAIN, "Domain", config);
     }
 
     static {
         ProviderConfigProperty attrUserModel = createConfigProperty(
                 LdapLogonStorageMapper.USER_MODEL_ATTRIBUTE,
                 "User Model Attribute Name",
-                "Name of the User attribute containing logon - default 'logon'",
-                "String",
-                null);
-
-        ProviderConfigProperty attrDomain = createConfigProperty(
-                LdapLogonStorageMapper.DOMAIN,
-                "Domain",
-                "LDAP Domain; Upper case short domain -> EXAMPLE",
+                "Name of the User attribute containing logon - default 'sid'",
                 "String",
                 null);
 
         configProperties.add(attrUserModel);
-        configProperties.add(attrDomain);
     }
 }

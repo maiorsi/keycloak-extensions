@@ -8,8 +8,12 @@ check:
 
 fix:
 	@echo "Fixing..."
-	mvn spotless:apply --file keycloak-extensions/pom.xml
+	mvn rewrite:run spotless:apply --file keycloak-extensions/pom.xml
 
 clean:
 	@echo "Cleaning..."
 	mvn clean --file keycloak-extensions/pom.xml
+
+test:
+	@echo "Testing..."
+	mvn test --file keycloak-extensions/pom.xml
