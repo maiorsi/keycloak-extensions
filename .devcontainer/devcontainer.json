@@ -4,5 +4,10 @@
     "ghcr.io/devcontainers/features/java:1": {
       "installMaven": true
     }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-vscode.makefile-tools", "vscjava.vscode-java-pack", "redhat.vscode-xml"]
+    }
   }
 }

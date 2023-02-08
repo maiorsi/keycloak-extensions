@@ -12,7 +12,7 @@ import org.keycloak.models.ClientModel;
 import org.keycloak.models.RoleModel;
 import org.keycloak.models.UserModel;
 
-public class UserMapper {
+public final class UserMapper {
     private static final Logger log = Logger.getLogger(UserMapper.class);
 
     public UserDto defaultMapping(UserModel userModel) {

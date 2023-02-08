@@ -1,5 +1,7 @@
 package maiorsi.keycloak;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Base64;
 import maiorsi.keycloak.util.LdapUtils;
 import org.junit.jupiter.api.Test;
