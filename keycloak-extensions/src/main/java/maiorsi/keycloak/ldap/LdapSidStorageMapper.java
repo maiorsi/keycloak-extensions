@@ -31,7 +31,7 @@ public final class LdapSidStorageMapper extends AbstractLDAPStorageMapper {
         query.addReturningLdapAttribute(LDAP_ATTRIBUTE);
         query.addReturningReadOnlyLdapAttribute(LDAP_ATTRIBUTE);
 
-        Iterator<Condition> iterator = query.getConditions();
+        Iterator<Condition> iterator = query.getConditions().iterator();
 
         while (true) {
             Condition condition;
