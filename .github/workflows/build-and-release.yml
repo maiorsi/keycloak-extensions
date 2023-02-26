@@ -51,10 +51,10 @@ jobs:
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.CommitsSinceVersionSource }}"
           
     - name: Test
-      run: mvn test --file pom.xml
+      run: mvn test --file keycloak-extensions/pom.xml
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file keycloak-extensions/pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
