@@ -3,8 +3,10 @@ package maiorsi.keycloak;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Base64;
-import maiorsi.keycloak.util.LdapUtils;
+
+import maiorsi.keycloak.util.GuidUtils;
 import org.junit.jupiter.api.Test;
+import org.springframework.ldap.support.LdapUtils;
 
 public class LdapTests {
     private static String BINARY_OBJECT_SID = "AQQAAAAAAAUVAAAAwdFKz9WmazDFb3Y8";
@@ -15,7 +17,7 @@ public class LdapTests {
     @Test
     public void testDecodeGuid() {
         byte[] bytes = Base64.getDecoder().decode(BINARY_OBJECT_GUID);
-        String decoded = LdapUtils.decodeObjectGuid(bytes);
+        String decoded = GuidUtils.convertBinaryGuidToString(bytes);
 
         assertThat(decoded).isEqualTo(GUID_STRING);
     }
@@ -24,14 +26,14 @@ public class LdapTests {
     public void testDecodeSid() {
         byte[] bytes = Base64.getDecoder().decode(BINARY_OBJECT_SID);
 
-        String decoded = LdapUtils.decodeObjectSid(bytes);
+        String decoded = LdapUtils.convertBinarySidToString(bytes);
 
         assertThat(decoded).isEqualTo(SID_STRING);
     }
 
     @Test
     public void testEncodeSid() {
-        byte[] bytes = LdapUtils.encodeSidString(SID_STRING);
+        byte[] bytes = LdapUtils.convertStringSidToBinary(SID_STRING);
         String bytesBase64 = Base64.getEncoder().encodeToString(bytes);
 
         assertThat(bytesBase64).isEqualTo(BINARY_OBJECT_SID);

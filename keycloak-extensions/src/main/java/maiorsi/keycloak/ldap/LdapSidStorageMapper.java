@@ -2,7 +2,6 @@ package maiorsi.keycloak.ldap;
 
 import java.util.Base64;
 import java.util.Iterator;
-import maiorsi.keycloak.util.LdapUtils;
 import org.jboss.logging.Logger;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.models.RealmModel;
@@ -12,6 +11,7 @@ import org.keycloak.storage.ldap.idm.model.LDAPObject;
 import org.keycloak.storage.ldap.idm.query.Condition;
 import org.keycloak.storage.ldap.idm.query.internal.LDAPQuery;
 import org.keycloak.storage.ldap.mappers.AbstractLDAPStorageMapper;
+import org.springframework.ldap.support.LdapUtils;
 
 public final class LdapSidStorageMapper extends AbstractLDAPStorageMapper {
     private static final Logger log = Logger.getLogger(LdapSidStorageMapper.class);
@@ -64,7 +64,7 @@ public final class LdapSidStorageMapper extends AbstractLDAPStorageMapper {
 
         if (sidBase64 != null && !sidBase64.trim().isEmpty()) {
             byte[] bytes = Base64.getDecoder().decode(sidBase64);
-            String sid = LdapUtils.decodeObjectSid(bytes);
+            String sid = LdapUtils.convertBinarySidToString(bytes);
 
             userModel.setSingleAttribute(getUserModelAttribute(), sid);
 
@@ -75,7 +75,8 @@ public final class LdapSidStorageMapper extends AbstractLDAPStorageMapper {
     }
 
     @Override
-    public void onRegisterUserToLDAP(LDAPObject _ldapUser, UserModel _userModel, RealmModel _realm) {}
+    public void onRegisterUserToLDAP(LDAPObject _ldapUser, UserModel _userModel, RealmModel _realm) {
+    }
 
     @Override
     public UserModel proxy(LDAPObject _ldapUser, UserModel userModel, RealmModel _realm) {

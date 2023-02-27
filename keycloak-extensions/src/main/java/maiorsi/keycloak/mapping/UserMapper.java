@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import maiorsi.keycloak.model.UserDto;
-import maiorsi.keycloak.util.LdapUtils;
+import maiorsi.keycloak.util.GuidUtils;
+
 import org.jboss.logging.Logger;
 import org.keycloak.models.ClientModel;
 import org.keycloak.models.RoleModel;
 import org.keycloak.models.UserModel;
+import org.springframework.ldap.support.LdapUtils;
 
 public final class UserMapper {
     private static final Logger log = Logger.getLogger(UserMapper.class);
@@ -21,7 +23,7 @@ public final class UserMapper {
 
         if (objectGuid.isPresent()) {
             byte[] bytes = Base64.getDecoder().decode(objectGuid.get());
-            decodedGuid = Optional.ofNullable(LdapUtils.decodeObjectGuid(bytes));
+            decodedGuid = Optional.ofNullable(GuidUtils.convertBinaryGuidToString(bytes));
         } else {
             decodedGuid = Optional.ofNullable(userModel.getFirstAttribute("LDAP_ID"));
         }
@@ -31,7 +33,7 @@ public final class UserMapper {
 
         if (objectSid.isPresent()) {
             byte[] bytes = Base64.getDecoder().decode(objectSid.get());
-            decodedSid = Optional.of(LdapUtils.decodeObjectSid(bytes));
+            decodedSid = Optional.of(LdapUtils.convertBinarySidToString(bytes));
         }
 
         return UserDto.builder()
