@@ -22,7 +22,7 @@ public class LdapTests {
 
     @Test
     public void testDecodeSid() {
-        byte[] bytes = Base64.getDecoder().decode(BINARY_OBJECT_GUID);
+        byte[] bytes = Base64.getDecoder().decode(BINARY_OBJECT_SID);
 
         String decoded = LdapUtils.decodeObjectSid(bytes);
 
