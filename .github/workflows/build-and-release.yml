@@ -56,6 +56,13 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file keycloak-extensions/pom.xml
 
+  release:
+  
+    runs-on: ubuntu-latest
+    if: needs.build.outputs.FullVersion == needs.build.outputs.Version
+    needs: build
+
+    steps:
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml --file keycloak-extensions/pom.xml
       env:
